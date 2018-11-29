@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/ropod-tagging-preset-1.0" author="Lakshadeep Naik">
+
+  <chunk id="surface_smoothness">
+    <combo key="surface:smoothness" text="Smoothness" values_searchable="true">
+      <list_entry value="excellent" short_description="Thin Rollers: rollerblade, skateboard"/>
+      <list_entry value="good" short_description="Thin Wheels: racing bike"/>
+      <list_entry value="intermediate" short_description="Wheels: city bike, wheelchair, scooter"/>
+      <list_entry value="bad" short_description="Robust Wheels: trekking bike, car, rickshaw"/>
+      <list_entry value="impassable" short_description="No wheeled vehicle"/>
+    </combo>
+  </chunk>
+
+  <chunk id="surface">
+    <combo key="surface" text="Surface" values="paved,unpaved,asphalt,concrete,metal,wood,paving_stones,cobblestone,gravel,pebblestone,compacted,grass_paver,grass,sand,ground,sett,carpet,tiles,vinyl,laminate"/>
+  </chunk>
+
+  <chunk id="internet">
+    <combo key="internet" text="Internet access" values="yes,no,wired,wireless"/>
+    <combo key="internet:ssid" text="SSID for WiFi networks"/>   
+  </chunk>
+
+  <chunk id="wall_material">
+    <combo key="wall:material" text="Wall material" values="plaster,concrete,brick,wood,stone,glass,timber_framing,metal,other"/>
+  </chunk>
+
+  <chunk id="door_material">
+    <combo key="door:material" text="Wall material" values="plaster,concrete,brick,wood,stone,glass,timber_framing,metal,other"/>
+  </chunk>
+
+  <chunk id="access">
+    <combo key="access" text="Access" values="yes,no,private,permissive,customers"/>
+  </chunk>
+
+  <chunk id="level">
+    <text key="level" text="Level" />
+  </chunk>
+
+  <group name="LoD1: Viewing indoor world on OSM">
+
+    <item name="Building" type="closedway">
+      <label text="Used for representing geographical and other basic information about the building" />
+      <text key="building" text="Usage" />
+      <text key="name" text="Name" />
+      <text key="addr:city" text="City" />
+      <text key="addr:country" text="Country" />
+      <text key="height" text="Height (in m)" />
+      <text key="min-level" text="Minimum level" />
+      <text key="max-level" text="Maximum level" />
+      <text key="non-existent-levels" text="Non existent levels" />
+      <text key="building:color" text="Building color" />
+      <text key="building:material" text="Building material" />
+    </item>
+
+    <item name="Wall" type="closedway">
+      <label text="Used for representing geometrical and perceptual information about the wall" />
+      <key key="indoor" value="wall" />
+      <text key="height" text="Height (in m)" />
+      <text key="min-height" text="Min-height (in m)" value="0" />
+      <reference ref="level"/>
+      <reference ref="wall_material"/>
+    </item>
+
+    <item name="Room" type="closedway">
+      <label text="Used for representing geometry, surface properties of the room and other basic information" />
+      <key key="indoor" value="room" />
+      <text key="ref" text="Ref" />  
+      <text key="room" text="Usage of room" />
+      <reference ref="access"/>
+      <reference ref="surface"/>
+      <reference ref="surface_smoothness"/>
+      <reference ref="internet"/>
+      <reference ref="level"/>
+    </item>
+
+    <item name="Area" type="closedway">
+      <label text="Used for representing geometry, surface properties of the area and other basic information" />
+      <key key="indoor" value="area" />
+      <text key="area" text="Usage of area" />
+      <text key="ref" text="Ref" /> 
+      <reference ref="surface"/>
+      <reference ref="surface_smoothness"/>
+      <reference ref="internet"/>
+      <reference ref="level"/>
+    </item>
+
+    <item name="Corridor" type="closedway">
+      <label text="Used for representing geometry, surface properties of the corridor and other basic information" />
+      <key key="indoor" value="corridor" />
+      <text key="ref" text="Ref" /> 
+      <reference ref="surface"/>
+      <reference ref="surface_smoothness"/>
+      <reference ref="internet"/>
+      <reference ref="level"/>
+    </item>
+
+    <item name="Elevator" type="closedway">
+      <label text="Used for representing geometry of the elevator" />
+      <text key="ref" text="Ref" /> 
+      <combo key="indoor" text="indoor" values="yes,room,area"/>
+      <key key="levels" text="Levels connected by elevator" />
+    </item>
+
+    <item name="Stairs" type="closedway">
+      <label text="Used for representing geometry of the stairs" />
+      <text key="ref" text="Ref" /> 
+      <combo key="indoor" text="indoor" values="yes,no,room,area"/>
+      <text key="levels" text="Levels connected by stairs" />
+    </item>
+
+    <item name="Door" type="closedway">
+      <label text="Used for representing geometry of the door along with its perception and navigation properties" />
+      <key key="indoor" value="door"/>
+      <combo key="door" text="Type of door" values="hinged,sliding,revolving,folding,trapdoor,overhead,loading-dock,yes,no"/>
+      <combo key="door:automatic" text="Door automatic" values="yes,no"/>
+      <combo key="door:direction" text="Door direction" values_searchable="true">
+        <list_entry value="inside" short_description="while entering it opens with direction of movement"/>
+        <list_entry value="outside" short_description="while entering it opens against direction of movement"/>
+        <list_entry value="both" short_description="both directions possible"/>
+      </combo>
+      <text key="step_count" text="Step count" />
+      <check key="always_closed" text="Always closed?" default="off" />  
+      <check key="double_doors" text="Double doors?" default="off" />  
+      <reference ref="level"/>
+    </item>
+
+  </group>
+
+
+  <group name="LoD2: Planning global navigation routes">
+
+    <item name="horizontal" type="way">
+      <label text="Used for planning navigation routes on a given floor" />
+      <text key="highway" text="highway" value="footway" />
+      <combo key="oneway" text="oneway" values="yes,no"/>
+      <optional>
+        <text key="lanes" text="lanes" />
+        <text key="lanes:forward" text="forward lanes" />
+        <text key="lanes:backward" text="backward lanes" />
+        <text key="lanes:forward:speed" text="forward lanes max speed" />
+        <text key="lanes:backward:speed" text="backward lanes max speed" />
+      </optional>
+      <reference ref="level"/>
+    </item>
+
+    <item name="vertical" type="node">
+      <label text="Used for planning navigation routes across the floors" />
+      <combo key="highway" text="highway" values="elevator,escalator,stairs,ramp"/>
+      <text key="levels" text="Connected levels" />
+      <optional>
+        <combo key="conveying" text="Conveying" values="yes,no"/>
+        <text key="stair:length" text="Length of step(in m)" />             
+        <text key="stair:width" text="Width of single step (in m)" />        
+        <text key="stair:height" text="Height of single step (in m)" />
+        <combo key="ramp:stroller" text="Ramp stroller" values="yes,no"/>
+        <text key="ramp:incline" text="Ramp incline (in degrees)" />
+        <text key="ramp:length" text="Length of step(in m)" /> 
+      </optional>
+    </item>
+
+  </group>
+
+
+  <group name="LoD3: Planning robot local navigation routes">
+
+    <item name="Local area" type="closedway">
+      <label text="Used for modeling local trafic rules for robot" />
+      <text key="indoor" value="local-area" />
+      <text key="behaviour" text="behaviour" />
+      <text key="ref" text="Ref" />  
+      <reference ref="level"/>
+    </item>
+
+    <item name="Connection" type="way">
+      <label text="Used for planning local robot navigation " />
+      <text key="highway" text="highway" value="localway" />
+      <combo key="oneway" text="oneway" values="yes,no"/>
+      <optional>
+        <text key="lanes" text="lanes" />
+        <text key="lanes:forward" text="forward lanes" />
+        <text key="lanes:backward" text="backward lanes" />
+        <text key="lanes:forward:speed" text="forward lanes max speed" />
+        <text key="lanes:backward:speed" text="backward lanes max speed" />
+      </optional>
+      <reference ref="level"/>
+    </item>
+
+  </group>
+
+  <group name="LoD4: Modeling robot perception features">
+
+    <item name="window" type="node">
+      <label text="Used for representing geometry of the window along with its perception properties" />
+      <text key="indoor" value="window" />
+      <text key="height" text="Height (in m)" />
+      <text key="width" text="Width (in m)" />
+      <text key="breast" text="Breast (in m) (height from ground)" />
+      <combo key="shape" text="Shape" values="rectangle,circle,roundtop" />
+      <text key="window:panes" text="Panes (eg. 3X2,2X2 etc.)" />
+      <check key="window:shutter" text="Shutter" default="off" />
+      <combo key="window:material" text="Window material" values="glass,glass_brick,stained_glass,plastic" />
+      <combo key="window:color" text="Window color" />
+      <combo key="frame:material" text="Frame material" values="wood,steel,aluminium" />
+      <text key="frame:color" text="Frame colour" />
+      <reference ref="level"/>
+    </item>
+
+    <item name="feature" type="node">
+      <label text="Used for representing other features such as electric switch boards, light source etc." />
+      <combo key="indoor" text="indoor" values="fire_extinguisher,electric_switch,poster,navigation_sign,waste_basket,light_source,other" />
+      <text key="height" text="Height (in m)" />
+      <text key="width" text="Width (in m)" />
+      <text key="breast" text="breast (in m) (height from ground)" />
+      <optional>
+        <combo key="shape" text="shape" values="rectangle,circle,roundtop,triangle" />
+        <text key="color" text="colour" />
+      </optional>
+      <reference ref="level"/>
+    </item>
+
+    <item name="Wall side" type="relation">
+      <label text="Used for describing properties of the wall side" />
+      <text key="ref" text="Wall side identifier" />
+      <text key="type" text="type" />
+      <text key="color" text="Color" />
+      <reference ref="wall_material"/>
+      <roles>
+        <role key="corner" text="corner" type="node" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+      </roles>
+    </item>
+
+    <item name="Door side" type="relation">
+      <label text="Used for describing properties of the door side" />
+      <text key="ref" text="Door side identifier" />
+      <text key="color" text="color" />
+      <combo key="door:handle" text="Door handle" values="knob,lever,crash-bar,ring,hole"/>
+      <reference ref="door_material"/>
+      <text key="type" text="type" />
+      <roles>
+        <role key="corner" text="corner" type="node" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+      </roles>
+    </item>
+
+  </group>
+
+  <group name="LoD5: Linking it all together (creating hierarchies)">
+
+    <item name="Building" type="relation">
+      <label text="Used for linking geometry, topology of the building and also the robot behaviour and perception models" />
+      <text key="ref" text="Building identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="level" text="level"  type="relation" />
+        <role key="elevator" text="elevator" requisite="optional" type="relation" />
+        <role key="stairs" text="stairs" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry"  type="closedway" />
+        <role key="behaviour" text="behaviour"  type="relation" />
+        <role key="perception_feature" text="perception-feature"  type="relation" />
+      </roles>
+    </item>
+
+    <item name="Level" type="relation">
+      <label text="Used for linking geometrical and topological models of all the indoor elements on a particular floor" />
+      <text key="ref" text="Level identifier" />
+      <text key="name" text="Level name (optional)" />
+      <text key="height" text="Level height (in m)" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="room" text="room" requisite="optional" type="relation" />
+        <role key="area" text="area" requisite="optional" type="relation" />
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="global_connection" text="connection" requisite="optional" type="way" />
+        <role key="corridor" text="corridor" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="local-area" type="relation">
+      <label text="Used for linking geometry and topology of local area" />
+      <text key="ref" text="Local area identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="topology" text="topology" requisite="optional" type="node" />
+        <role key="geometry" text="geometry" type="closedway" />
+      </roles>
+    </item>
+
+    <item name="Elevator" type="relation">
+      <label text="Used for linking doors and walls of the elevator along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Elevator identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Stairs/Ramp" type="relation">
+      <label text="Used for linking doors and walls of the stairs along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Stairs identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="relation,node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Room" type="relation">
+      <label text="Used for linking doors and walls of the room along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Room identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Area" type="relation">
+      <label text="Used for linking doors and walls of the area along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Area identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="relation,node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Corridor" type="relation">
+      <label text="Used for linking doors and walls of the corridor along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Corridor identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="relation,node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Junction" type="relation">
+      <label text="Used for linking doors and walls of the junction along with its geometrical and topological models, connection routes and features" />
+      <text key="ref" text="Junction identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="door" text="door" requisite="optional" type="relation" />
+        <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="geometry" text="geometry" type="closedway" />
+        <role key="topology" text="topology" type="relation,node" />
+        <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="feature" text="feature" requisite="optional" type="node" />
+        <role key="local_area" text="Local area" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Wall" type="relation">
+      <label text="Used for linking geometry of the wall, its sides and corners" />
+      <text key="ref" text="Wall identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="geometry" text="geometry" type="way" />
+        <role key="corner" text="corner" type="node" />
+        <role key="side" text="side" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Door" type="relation">
+      <label text="Used for linking geometry and topology of the door along with its 2 sides and hinge if applicable" />
+      <text key="ref" text="Door identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="side" text="side" requisite="optional" type="relation" />
+        <role key="hinge" text="hinge" requisite="optional" type="node" />
+        <role key="geometry" text="geometry" type="way" />
+        <role key="topology" text="topology" type="node" />
+      </roles>
+    </item>
+
+  </group>  
+
+</presets>
