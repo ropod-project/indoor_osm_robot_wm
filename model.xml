@@ -277,7 +277,7 @@
       </roles>
     </item>
 
-    <item name="local-area" type="relation">
+    <item name="Local area" type="relation">
       <label text="Used for linking geometry and topology of local area" />
       <text key="ref" text="Local area identifier" />
       <text key="type" text="type" />
@@ -324,6 +324,7 @@
       <roles>
         <role key="door" text="door" requisite="optional" type="relation" />
         <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="pillar" text="pillar" requisite="optional" type="relation" />
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
@@ -339,6 +340,7 @@
       <roles>
         <role key="door" text="door" requisite="optional" type="relation" />
         <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="pillar" text="pillar" requisite="optional" type="relation" />
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
@@ -354,6 +356,7 @@
       <roles>
         <role key="door" text="door" requisite="optional" type="relation" />
         <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="pillar" text="pillar" requisite="optional" type="relation" />
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
@@ -369,6 +372,7 @@
       <roles>
         <role key="door" text="door" requisite="optional" type="relation" />
         <role key="wall" text="wall" requisite="optional" type="relation" />
+        <role key="pillar" text="pillar" requisite="optional" type="relation" />
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
@@ -385,6 +389,15 @@
         <role key="geometry" text="geometry" type="way" />
         <role key="corner" text="corner" type="node" />
         <role key="side" text="side" requisite="optional" type="relation" />
+      </roles>
+    </item>
+
+    <item name="Pillar" type="relation">
+      <label text="Used for linking geometry of the pillar" />
+      <text key="ref" text="Pillar identifier" />
+      <text key="type" text="type" />
+      <roles>
+        <role key="geometry" text="geometry" type="way" />
       </roles>
     </item>
 
