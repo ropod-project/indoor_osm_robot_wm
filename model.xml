@@ -124,6 +124,7 @@
       <reference ref="level"/>
     </item>
 
+
   </group>
 
 
@@ -188,6 +189,15 @@
   </group>
 
   <group name="LoD4: Modeling robot perception features">
+
+    <item name="WLAN" type="node">
+      <label text="Used for representing position and properties of wifi access points" />
+      <text key="WLAN_ssid" text="WLAN ssid" />
+      <optional>
+          <reference ref="access"/>
+      </optional>
+      <reference ref="level"/>
+    </item>
 
     <item name="window" type="node">
       <label text="Used for representing geometry of the window along with its perception properties" />
@@ -274,6 +284,7 @@
         <role key="wall" text="wall" requisite="optional" type="relation" />
         <role key="global_connection" text="connection" requisite="optional" type="way" />
         <role key="corridor" text="corridor" requisite="optional" type="relation" />
+        <role key="wlan" text="wlan" requisite="optional" type="node" />
       </roles>
     </item>
 
@@ -297,6 +308,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -312,6 +324,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -328,6 +341,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -344,6 +358,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -360,6 +375,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -376,6 +392,7 @@
         <role key="geometry" text="geometry" type="closedway" />
         <role key="topology" text="topology" type="relation,node" />
         <role key="local_connection" text="connection" requisite="optional" type="way" />
+        <role key="recovery_connection" text="Recovery connection" requisite="optional" type="way" />
         <role key="feature" text="feature" requisite="optional" type="node" />
         <role key="local_area" text="Local area" requisite="optional" type="relation" />
       </roles>
@@ -412,6 +429,7 @@
         <role key="topology" text="topology" type="node" />
       </roles>
     </item>
+
 
   </group>  
 
